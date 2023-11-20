@@ -26,7 +26,18 @@ export const useMemberStore = defineStore(
     }
   },
   // TODO: 持久化
+  // 网页只需要persist: true
+  // 小程序端缺少api，需要更改配置
   {
-    persist: true,
+    persist: {
+      storage: {
+        getItem(key) {
+          return uni.getStorageSync(key)
+        },
+        setItem(key, value) {
+          return uni.setStorageSync(key, value)
+        },
+      },
+    },
   },
 )
